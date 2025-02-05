@@ -1,0 +1,26 @@
+
+
+
+HOOKS:
+
+faire [x] pour escape
+
+COLLISIONS:
+
+avec wall - 0K
+avec collectible + increase collec count 
+count movement++
+
+SPRITES:
+
+gerer transparence eventuellement - meh ?
+
+MAP
+
+map tester
+map random generator
+floodfill
+
+
+
+
