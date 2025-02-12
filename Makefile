@@ -1,62 +1,69 @@
-NAME 		= 	so_long
-LIBFT 		= 	./libraries/libft/libft.a
-MLX_DIR 	= 	./libraries/mlx
-LIBRARY 	= 	-L$(MLX_DIR) -lmlx -lX11 -lXext -lm
+NAME	=	so_long
+LIBFT	=	./libraries/libft/libft.a
+MLX_DIR =	./libraries/mlx
+LIBRARY =	-L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 
-GAME_MAIN	= srcs/main.c
+UTILS_SRCS =	\
+srcs/map_utils.c \
+srcs/render.c \
+srcs/hooks.c \
+srcs/map_parser.c \
+srcs/collisions.c \
+srcs/game_utils.c \
+srcs/map_validator.c \
+srcs/enemy_move.c \
+srcs/init_game.c \
+srcs/game_exit.c \
+srcs/entity_init.c \
+srcs/entity_update.c \
+srcs/rescale_xpm.c \
+srcs/floodfill.c
 
-SRCS 		= 	srcs/map_utils.c \
-				srcs/map_utils2.c \
-				srcs/render.c \
-				srcs/hooks.c \
-				srcs/init.c \
-				srcs/map_parser.c \
-				srcs/update.c \
-				srcs/init_map.c \
-				srcs/close.c \
-				srcs/collisions.c
+SO_LONG_SRC = srcs/main.c
+RMAP_SRC = srcs/map_gen.c
 
-OBJS 		= 	$(SRCS:.c=.o)
-GAME_OBJ	= $(GAME_MAIN:.c=.o)
-CC 			= 	gcc	
-#CFLAGS 	= 	-Wall -Werror -Wextra -I./includes -I$(MLX_DIR)
-CFLAGS 		= 	-Wall -Wextra -I./includes -I$(MLX_DIR)
+UTILS_OBJ = $(UTILS_SRCS:.c=.o)
+SO_LONG_OBJ = $(SO_LONG_SRC:.c=.o)
+RMAP_OBJ = $(RMAP_SRC:.c=.o)
 
-RM 			= 	rm -rf
-AR 			= 	ar rcs
-
-RMAP_SRC	=	srcs/map_gen.c
-RMAP_OBJ	=	$(RMAP_SRC:.c=.o)
-RMAP_NAME	=	rmap
+CC = gcc
+CFLAGS = -Wall -Wextra -I./includes -I$(MLX_DIR)
+RM = rm -rf
 
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	@echo "Building libft... Plese wait."
+	@echo "Building libft... Please wait."
 	@make -C ./libraries/libft > /dev/null 2>&1
 
-$(NAME): ${OBJS} $(GAME_MAIN) ${LIBFT}
+$(NAME): $(UTILS_OBJ) $(SO_LONG_OBJ) $(LIBFT)
 	@echo "Building so_long... Please wait."
-	@${CC} ${OBJS} $(GAME_MAIN) ${LIBFT} $(LIBRARY) -o ${NAME}
+	@$(CC) $(UTILS_OBJ) $(SO_LONG_OBJ) $(LIBFT) $(LIBRARY) -o $(NAME)
+	@echo "✅ Done!"
 
-$(RMAP_NAME): ${OBJS} $(RMAP_OBJ) $(LIBFT)
-	@echo "Building map generator... Please wait."
-	@${CC} ${OBJS} $(RMAP_OBJ) $(LIBFT) $(LIBRARY) -o $(RMAP_NAME)
+rmap: $(UTILS_OBJ) $(RMAP_OBJ) $(LIBFT)
+	$(CC) $(UTILS_SRCS) $(RMAP_SRC) $(LIBFT) $(LIBRARY) -o rmap
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+debug: $(UTILS_OBJ) $(SO_LONG_OBJ) $(LIBFT)
+	@$(CC) -fsanitize=address $(UTILS_OBJ) $(SO_LONG_OBJ) $(LIBFT) $(LIBRARY) -o $(NAME)
+
 clean:
-	@echo "Cleaning..."
-	@rm -f $(OBJS)
+	@echo "🧹 Cleaning..."
+	@$(RM) $(SO_LONG_OBJ)
 	@make clean -C ./libraries/libft > /dev/null 2>&1
-	@echo "Done !"
+	@echo "✨ Clean complete!"
 
 fclean: clean
-	@echo "Cleaning all..."
-	@rm -f $(NAME)
+	@echo "🧹 Cleaning all..."
+	@$(RM) $(NAME)
+	@$(RM) $(RMAP_OBJ)
+	@$(RM) $(UTILS_OBJ)
+	@$(RM) $(SO_LONG_OBJ)
 	@make fclean -C ./libraries/libft > /dev/null 2>&1
-	@echo "Done !"
+	@echo "✨ Full clean complete!"
 
 re: fclean all
 

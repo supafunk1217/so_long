@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:28:28 by rcossett          #+#    #+#             */
-/*   Updated: 2025/01/23 02:19:57 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:02:35 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_map(t_vec2 size)
 		pos.x = 0;
 		while (pos.x < size.x)
 		{
-			if (pos.x == 0 || pos.x == size.x - 1 || pos.y == 0 || pos.y == size.y - 1) // a check magic happens
+			if (pos.x == 0 || pos.x == size.x - 1 || \
+				pos.y == 0 || pos.y == size.y - 1)
 				map_content[i++] = '1';
 			else
 				map_content[i++] = '0';
@@ -50,7 +51,7 @@ void	add_character(char *map, char c, int len)
 	map[random_index] = c;
 }
 
-void	populate_with_entities(char *map)
+void	populate_with_ents(char *map)
 {
 	int	len;
 	int	wall_ratio;
@@ -61,9 +62,8 @@ void	populate_with_entities(char *map)
 	len = ft_strlen(map);
 	add_character(map, 'P', len);
 	add_character(map, 'E', len);
-
 	wall_ratio = 10;
-	ennemy_ratio = 30; // plus nombfe erst eleve moins il y en a 
+	ennemy_ratio = 30;
 	coll_ratio = 5;
 	i = 0;
 	while (i++ < len / wall_ratio)
@@ -76,7 +76,6 @@ void	populate_with_entities(char *map)
 		add_character(map, 'F', len);
 }
 
-
 void	add_to_file(char *file_name, char *content)
 {
 	int	fd;
@@ -85,9 +84,7 @@ void	add_to_file(char *file_name, char *content)
 	write(fd, content, ft_strlen(content));
 }
 
-
-// argv[1] = width of map | argv[2] = height of map
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	char	*map_name;
 	char	*map_content;
@@ -95,12 +92,12 @@ int main(int argc, char *argv[])
 
 	srand(time(0));
 	map_name = ft_strdup("Randomap.ber");
-	map_size = get_v2(10, 10); // si on ne specifie pas d'arguments pour la taille, prendre tailel standard > 10 x 10
+	map_size = get_v2(10, 10);
 	if (argc >= 3)
 		map_size.x = ft_atoi(argv[2]);
 	if (argc >= 4)
 		map_size.y = ft_atoi(argv[3]);
 	map_content = get_map(map_size);
-	populate_with_entities(map_content);
+	populate_with_ents(map_content);
 	add_to_file(map_name, map_content);
 }

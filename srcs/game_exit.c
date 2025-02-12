@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   game_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 00:26:35 by rcossett          #+#    #+#             */
-/*   Updated: 2025/01/23 02:16:29 by rcossett         ###   ########.fr       */
+/*   Created: 2025/02/12 18:35:10 by rcossett          #+#    #+#             */
+/*   Updated: 2025/02/13 00:08:27 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	free_entity(t_game *game, t_entity *ent)
 	free(ent);
 }
 
-void	free_entities(t_game *game)
+void	free_ents(t_game *game)
 {
 	int			i;
 
 	i = -1;
-	while (game->entities[++i])
-		free_entity(game, game->entities[i]);
-	free(game->entities);
+	while (game->ents[++i])
+		free_entity(game, game->ents[i]);
+	free(game->ents);
 }
 
 void	free_map(t_game *game)
@@ -45,12 +45,17 @@ void	free_map(t_game *game)
 	free(game->map);
 }
 
-// on itere dans les entites puis dans leurs frames potentielles afin de destroy image + free
-void	free_and_exit(t_game *game)
+// on itere dans les entites puis dans leurs
+// potentielles afin de destroy image + free
+void	free_and_exit(char *msg, t_game *game)
 {
-	free_entities(game);
-	free_map(game);
+	if (game->ents != NULL)
+		free_ents(game);
+	if (game->map != NULL)
+		free_map(game);
 	mlx_destroy_image(game->mlx, game->bgr);
 	mlx_destroy_window(game->mlx, game->win);
+	if (msg)
+		printf("%s\n", msg);
 	exit(0);
 }

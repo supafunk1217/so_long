@@ -6,41 +6,35 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:36:15 by rcossett          #+#    #+#             */
-/*   Updated: 2025/01/22 17:39:30 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:55:50 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char	**allocate_map(int height)
+int	count_lines(char *map_path)
 {
-	char	**map;
+	int		count;
+	int		fd;
+	char	*line;
 
-	map = malloc(sizeof(char *) * (height + 1));
-	if (!map)
-		return (NULL);
-	return (map);
+	count = 0;
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	line = get_next_line(fd);
+	while (line)
+	{
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (count);
 }
 
 void	clean_line(char *line)
 {
 	if (line && line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-}
-
-t_vec2	get_v2(int x, int y)
-{
-	t_vec2 vector;
-
-	vector.x = x;
-	vector.y = y;
-	return (vector);
-}
-
-//		returns a random value betwewen min and max
-int r_range(int min, int max)
-{
-    if (min > max)
-        return -1;
-    return (rand() % (max - min + 1) + min);
 }
