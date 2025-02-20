@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:23:03 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 23:58:55 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:51:07 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef enum t_direction
 	left,
 	right,
 	down
-}	t_dir;
+}			t_dir;
 
 // types d'entites presentes dans le jeu
 typedef enum t_entity_type
@@ -122,46 +122,35 @@ typedef struct s_game
 	double		time_at_start;
 }					t_game;
 
-/* fonctions presentes et prototypes */
+void		init_game(t_game *game);
+void		init_hooks(t_game *game);
+int			init_map(t_game *game);
 
-//			PARSING
+int			load_map(t_game *game, char *map_path);
 int			count_lines(char *map_path);
 char		**allocate_map(int height);
 void		clean_line(char *line);
-//static int	validate_line(char *line, int width);
+int			execute_floodfill(t_game *game);
 
-//			RESALE_XPM
-void		*rescale_xpm(void *mlx, char *path, int new_w, int new_h);
-
-//			HOOKS
-int			handle_keypress(int keycode, t_game *game);
-int			handle_close(t_game *game);
-void		handle_move(t_game *game, int direction);
-
-//			INIT
-void		init_hooks(t_game *game);
-int			load_map(t_game *game, char *map_path);
-void		init_game(t_game *game);
-int			init_map(t_game *game);
-
-//			UPDATE
-int			update(t_game *game);
-
-//			render
-void		render_game(t_game *game);
-
-//			UTILS
-t_vec2		get_v2(int x, int y);
-int			cmp_vec2(t_vec2 a, t_vec2 b);
-int			r_range(int min, int max);
-int			is_move_valid(t_game *game, t_vec2 new_pos);
-t_entity	*get_ent_at_position(t_game *game, t_vec2 pos, t_entity *me);
-void		free_and_exit(char *exit_msg, t_game *game);
 t_entity	*init_entity(t_game *game, char c, t_vec2 pos, t_entity_type type);
 t_entity	*parse_character(t_game *game, char c, t_vec2 pos);
 int			update_enemy(t_game *game, t_entity *ent, int index);
 
-int			execute_floodfill(t_game *game);
+int			is_move_valid(t_game *game, t_vec2 new_pos);
+t_entity	*get_ent_at_position(t_game *game, t_vec2 pos, t_entity *me);
+void		handle_move(t_game *game, int direction);
+
+void		render_game(t_game *game);
+void		*rescale_xpm(void *mlx, char *path, int new_w, int new_h);
+
+int			handle_keypress(int keycode, t_game *game);
+int			handle_close(t_game *game);
+int			update(t_game *game);
+
+t_vec2		get_v2(int x, int y);
+int			cmp_vec2(t_vec2 a, t_vec2 b);
+int			r_range(int min, int max);
 char		*ft_strmegajoin(char *a, char *b, char *c, char *d);
+void		free_and_exit(char *exit_msg, t_game *game);
 
 #endif

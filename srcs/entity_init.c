@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:36:33 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 00:01:20 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:13:56 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,21 @@ void	*init_frame(t_game *game, t_vec2 *size, char *path, int index)
 	void	*frame;
 
 	index_str = ft_itoa(index);
+	if (!index_str)
+		return (NULL);
 	index_xpm = ft_strjoin(index_str, ".xpm");
-	full_path = ft_strjoin(path, index_xpm);
 	free(index_str);
+	if (!index_str)
+		return (NULL);
+	full_path = ft_strjoin(path, index_xpm);
 	free(index_xpm);
+	if (!full_path)
+		return (NULL);
 	frame = rescale_xpm(game->mlx, full_path, game->tile_size, game->tile_size);
-	*size = get_v2(game->tile_size, game->tile_size);
 	free(full_path);
+	if (!frame)
+		return (NULL);
+	*size = get_v2(game->tile_size, game->tile_size);
 	return (frame);
 }
 
@@ -55,62 +63,68 @@ void	init_frames(char *path, t_game *game, t_entity *ent, int frames_amount)
 
 	frames = malloc(sizeof(void *) * (frames_amount + 1));
 	if (!frames)
-		free_and_exit("Error: malloc failed.", game);
+		free_and_exit("Error\n Malloc failed\n", game);
 	i = -1;
 	while (++i < frames_amount)
+	{
 		frames[i] = init_frame(game, &ent->size, path, i);
+		if (!frames[i])
+		{
+			while (--i >= 0)
+				mlx_destroy_image(game->mlx, frames[i]);
+			free(frames);
+			free_and_exit("Error\n Frame initialization failed\n", game);
+		}
+	}
 	frames[i] = NULL;
 	ent->frames = frames;
 	ent->frame_index = 0;
 	ent->current_frame = ent->frames[ent->frame_index];
 }
 
-char	*ft_strmegajoin(char *a, char *b, char *c, char *d)
+static int	ent_prop(t_entity *ent, t_game *game, t_entity_type type)
 {
-	char	*a_b;
-	char	*a_b_c;
-	char	*a_b_c_d;
+	int	frames_amount;
 
-	if (!a && !b)
-		return (NULL);
-	if (!b)
-		return (a);
-	a_b = ft_strjoin(a, b);
-	if (!c)
-		return (a_b);
-	a_b_c = ft_strjoin(a_b, c);
-	free(a_b);
-	if (!d)
-		return (a_b_c);
-	a_b_c_d = ft_strjoin(a_b_c, d);
-	free(a_b_c);
-	return (a_b_c_d);
+	ent->active = 1;
+	ent->type = type;
+	ent->direction = r_range(0, 4);
+	if (type == collectible)
+		game->max_collectibles++;
+	frames_amount = 1;
+	if (type == player)
+		frames_amount = 2;
+	else if (type == enemy)
+		frames_amount = 3;
+	return (frames_amount);
 }
 
 // Construct path > ./includes/sprites/ + "c"
 t_entity	*init_entity(t_game *game, char c, t_vec2 pos, t_entity_type type)
 {
 	t_entity	*new_ent;
-	int			frames_amount;
 	char		*path;
 	char		*str;
 
 	new_ent = malloc(sizeof(t_entity));
+	if (!new_ent)
+		free_and_exit("Error\n Malloc failed\n", game);
 	new_ent->pos = get_v2(pos.x * game->tile_size, pos.y * game->tile_size);
 	new_ent->start_pos = get_v2(new_ent->pos.x, new_ent->pos.y);
-	new_ent->type = type;
-	new_ent->active = 1;
-	if (type == collectible)
-		game->max_collectibles++;
-	new_ent->direction = r_range(0, 4);
-	frames_amount = 1;
-	if (type == player)
-		frames_amount = 2;
-	else if (type == enemy)
-		frames_amount = 3;
 	str = ft_strdup(" /");
+	if (!str)
+	{
+		free(new_ent);
+		free_and_exit("Error\n strdup failed\n", game);
+	}
 	str[0] = c;
 	path = ft_strjoin(SPRITES_PATH, str);
-	init_frames(path, game, new_ent, frames_amount);
+	if (!path)
+	{
+		free(str);
+		free(new_ent);
+		free_and_exit("Error\n strjoin failed\n", game);
+	}
+	init_frames(path, game, new_ent, ent_prop(new_ent, game, type));
 	return (free(str), free(path), new_ent);
 }

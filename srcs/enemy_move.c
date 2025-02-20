@@ -6,13 +6,12 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:41:38 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 21:46:01 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:28:48 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//		direction de l'ennemi
 void	set_enemy_direction(t_entity *target, t_entity *ent)
 {
 	int	dx;
@@ -70,7 +69,11 @@ int	update_enemy(t_game *game, t_entity *ent, int index)
 	if (game->time % (ENEMY_SPEED) == 0)
 	{
 		if (handle_enemy_movement(game, ent))
+		{
+			if (cmp_vec2(ent->pos, game->player->pos))
+				free_and_exit("YOU DIED NOOB", game);
 			return (1);
+		}
 	}
 	if (game->time % ANIM_REFRESH == 0)
 	{

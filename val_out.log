@@ -1,0 +1,176 @@
+==142341== Memcheck, a memory error detector
+==142341== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==142341== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==142341== Command: ./so_long Randomap.ber
+==142341== Parent PID: 100560
+==142341== 
+--142341-- 
+--142341-- Valgrind options:
+--142341--    --leak-check=full
+--142341--    --show-leak-kinds=all
+--142341--    --track-origins=yes
+--142341--    --verbose
+--142341--    --log-file=val_out.log
+--142341-- Contents of /proc/version:
+--142341--   Linux version 6.13.1-1-t2-jammy (root@b4ed73a3c50d) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #1 SMP PREEMPT_DYNAMIC Sun Feb  2 03:02:04 UTC 2025
+--142341-- 
+--142341-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--142341-- Page sizes: currently 4096, max supported 4096
+--142341-- Valgrind library directory: /usr/libexec/valgrind
+--142341-- Reading syms from /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--142341--   Considering /usr/lib/debug/.build-id/e4/de036b19e4768e7591b596c4be9f9015f2d28a.debug ..
+--142341--   .. build-id is valid
+--142341-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--142341--    object doesn't have a symbol table
+--142341--    object doesn't have a dynamic symbol table
+--142341-- Scheduler: using generic scheduler lock implementation.
+--142341-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==142341== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-142341-by-rcossett-on-???
+==142341== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-142341-by-rcossett-on-???
+==142341== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-142341-by-rcossett-on-???
+==142341== 
+==142341== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==142341== don't want to do, unless you know exactly what you're doing,
+==142341== or are doing some strange experiment):
+==142341==   /usr/bin/vgdb --pid=142341 ...command...
+==142341== 
+==142341== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==142341==   /path/to/gdb ./so_long
+==142341== and then give GDB the following command
+==142341==   target remote | /usr/bin/vgdb --pid=142341
+==142341== --pid is optional if only one valgrind process is running
+==142341== 
+--142341-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--142341-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--142341-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--142341--    object doesn't have a symbol table
+==142341== WARNING: new redirection conflicts with existing -- ignoring it
+--142341--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--142341--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--142341-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--142341-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--142341--   Considering /usr/lib/debug/.build-id/cd/410b710f0f094c6832edd95931006d883af48e.debug ..
+--142341--   .. build-id is valid
+==142341== WARNING: new redirection conflicts with existing -- ignoring it
+--142341--     old: 0x04a6cc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--142341--     new: 0x04a6cc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==142341== WARNING: new redirection conflicts with existing -- ignoring it
+--142341--     old: 0x04a6cc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--142341--     new: 0x04a6cc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==142341== WARNING: new redirection conflicts with existing -- ignoring it
+--142341--     old: 0x04a6cc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--142341--     new: 0x04a6cc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==142341== WARNING: new redirection conflicts with existing -- ignoring it
+--142341--     old: 0x04a6cc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--142341--     new: 0x04a6cc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.11.5
+--142341--    object doesn't have a symbol table
+--142341-- Reading syms from /usr/lib/x86_64-linux-gnu/libmd.so.0.0.5
+--142341--    object doesn't have a symbol table
+--142341-- REDIR: 0x4a6f720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f9e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f2e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a8dcd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a706d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a8c540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a8c370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a705a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==142341== Preferring higher priority redirection:
+--142341--     old: 0x04b677c0 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--142341--     new: 0x04b677c0 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--142341-- REDIR: 0x4a8c3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a709e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a8c9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a8c470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f1d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a78570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a72010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f6a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6f8d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a703f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a6fb00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a707d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a70ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4a71f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--142341-- REDIR: 0x4b64610 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--142341-- REDIR: 0x4a6c0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--142341-- REDIR: 0x4b647e0 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--142341-- REDIR: 0x4b5fd80 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
+--142341-- REDIR: 0x4a6d520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
+--142341-- REDIR: 0x4b677c0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--142341-- REDIR: 0x4a6c3e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--142341-- REDIR: 0x4b64400 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+--142341-- REDIR: 0x4afb7e0 (libc.so.6:__strcpy_chk) redirected to 0x48533a0 (__strcpy_chk)
+--142341-- REDIR: 0x4a6ffc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--142341-- REDIR: 0x4b60a80 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
+--142341-- REDIR: 0x4b67f80 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
+--142341-- REDIR: 0x4a6c740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
+--142341-- REDIR: 0x4b66040 (libc.so.6:__strncpy_avx2) redirected to 0x484efe0 (strncpy)
+--142341-- REDIR: 0x4b5f940 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
+--142341-- REDIR: 0x4b65cb0 (libc.so.6:__strcpy_avx2) redirected to 0x484ee60 (strcpy)
+--142341-- REDIR: 0x4b61130 (libc.so.6:__strcasecmp_avx) redirected to 0x484f560 (strcasecmp)
+--142341-- REDIR: 0x4b67780 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+==142341== 
+==142341== HEAP SUMMARY:
+==142341==     in use at exit: 224 bytes in 2 blocks
+==142341==   total heap usage: 49,883 allocs, 49,881 frees, 2,014,762 bytes allocated
+==142341== 
+==142341== Searching for pointers to 2 not-freed blocks
+==142341== Checked 3,786,608 bytes
+==142341== 
+==142341== 136 bytes in 1 blocks are indirectly lost in loss record 1 of 2
+==142341==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==142341==    by 0x49B70C3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==142341==    by 0x112EB6: mlx_int_new_xshm_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x1131B2: mlx_new_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x113A97: mlx_int_parse_xpm (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x113EC4: mlx_xpm_file_to_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x110A9A: init_game (init_game.c:31)
+==142341==    by 0x111D0D: main (main.c:22)
+==142341== 
+==142341== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 2
+==142341==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==142341==    by 0x112E8B: mlx_int_new_xshm_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x1131B2: mlx_new_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x113A97: mlx_int_parse_xpm (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x113EC4: mlx_xpm_file_to_image (in /home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long)
+==142341==    by 0x110A9A: init_game (init_game.c:31)
+==142341==    by 0x111D0D: main (main.c:22)
+==142341== 
+==142341== LEAK SUMMARY:
+==142341==    definitely lost: 88 bytes in 1 blocks
+==142341==    indirectly lost: 136 bytes in 1 blocks
+==142341==      possibly lost: 0 bytes in 0 blocks
+==142341==    still reachable: 0 bytes in 0 blocks
+==142341==         suppressed: 0 bytes in 0 blocks
+==142341== 
+==142341== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 2 from 1)
+--142341-- 
+--142341-- used_suppression:      2 X on SUSE11 writev uninit padding /usr/libexec/valgrind/default.supp:377
+==142341== 
+==142341== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 2 from 1)

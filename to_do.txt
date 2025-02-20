@@ -1,13 +1,7 @@
 
-HOOKS:
-
-faire [x] pour escape
 
 COLLISIONS:
 
-avec wall - 0K
-avec collectible + increase collec count 
-count movement++
 pouvoir rentrer volontairement dans les ennemis
 
 SPRITES:
@@ -16,6 +10,5 @@ gerer transparence eventuellement - meh ?
 
 MAP
 
-map tester
-map random generator
 floodfill
+map seulement rectangulaire

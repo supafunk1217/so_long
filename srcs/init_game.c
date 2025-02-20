@@ -6,11 +6,27 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:24:32 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 00:03:55 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:39:08 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/*static int is_safe_spawn_distance(t_game *game, t_vec2 pos)
+{
+	int	i;
+	int	safe_distance;
+
+	safe_distance = 2 * game->tile_size;
+	i = -1;
+	while (game->ents[++i])
+	{
+		if (abs(game->ents[i]->pos.x - pos.x) < safe_distance && 
+			abs(game->ents[i]->pos.y - pos.y) < safe_distance)
+			return (0);
+	}
+	return (1);
+}*/
 
 void	init_game(t_game *game)
 {
@@ -27,8 +43,11 @@ void	init_game(t_game *game)
 	game->max_collectibles = 0;
 	game->initialized = 0;
 	game->time = 0;
+	game->bgr = NULL;
 	game->bgr = mlx_xpm_file_to_image(game->mlx, BGR_IMG, \
 		&game->bgr_size.x, &game->bgr_size.y);
+	if (!game->bgr)
+		free_and_exit("Error\n", game->mlx);
 }
 
 void	init_hooks(t_game *game)

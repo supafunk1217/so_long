@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:00:16 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 23:14:11 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:36:58 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	load_map(t_game *game, char *map_path)
 		return (0);
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-		return (printf("Error while opening map.\n"), 0);
+		return (free_and_exit("Error\nwhile opening map.\n", game), 0);
 	process_map(game, fd);
 	close(fd);
 	return (1);

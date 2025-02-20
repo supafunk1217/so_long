@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:33:35 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 22:02:29 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:02:49 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,31 @@ int	r_range(int min, int max)
 	return (rand() % (max - min + 1) + min);
 }
 
-//return 1 auomatiquement si la condition est 
+//return 1 automatiquement si la condition est 
 // reunis cad que les deux position x et y matchent
 int	cmp_vec2(t_vec2 a, t_vec2 b)
 {
 	return (a.x == b.x && a.y == b.y);
+}
+
+char	*ft_strmegajoin(char *a, char *b, char *c, char *d)
+{
+	char	*a_b;
+	char	*a_b_c;
+	char	*a_b_c_d;
+
+	if (!a && !b)
+		return (NULL);
+	if (!b)
+		return (a);
+	a_b = ft_strjoin(a, b);
+	if (!c)
+		return (a_b);
+	a_b_c = ft_strjoin(a_b, c);
+	free(a_b);
+	if (!d)
+		return (a_b_c);
+	a_b_c_d = ft_strjoin(a_b_c, d);
+	free(a_b_c);
+	return (a_b_c_d);
 }

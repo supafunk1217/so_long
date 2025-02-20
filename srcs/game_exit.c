@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:35:10 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 00:08:27 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:20:13 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_entity(t_game *game, t_entity *ent)
 		frame_index = -1;
 		while (ent->frames[++frame_index])
 			mlx_destroy_image(game->mlx, ent->frames[frame_index]);
+		free(ent->frames);
 	}
 	free(ent);
 }
@@ -53,8 +54,18 @@ void	free_and_exit(char *msg, t_game *game)
 		free_ents(game);
 	if (game->map != NULL)
 		free_map(game);
-	mlx_destroy_image(game->mlx, game->bgr);
-	mlx_destroy_window(game->mlx, game->win);
+	if (game->bgr)
+	{
+		mlx_destroy_image(game->mlx, game->bgr);
+		game->bgr = NULL;
+	}
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	if (msg)
 		printf("%s\n", msg);
 	exit(0);

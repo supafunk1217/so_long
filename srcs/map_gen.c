@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:28:28 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 00:23:36 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:27:27 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,15 @@ int	main(int argc, char *argv[])
 
 	srand(time(0));
 	map_name = ft_strdup("Randomap.ber");
-	map_size = get_v2(10, 10);
+	map_size = get_v2(15, 8);
 	if (argc >= 2)
 		map_size.x = ft_atoi(argv[1]);
 	if (argc >= 3)
+	{
 		map_size.y = ft_atoi(argv[2]);
+		if (map_size.y >= map_size.x)
+			map_size.y = map_size.x -1;
+	}
 	map_content = get_map(map_size);
 	populate_with_ents(map_content);
 	add_to_file(map_name, map_content);
