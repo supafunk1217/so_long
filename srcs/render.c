@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 17:27:25 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 21:57:16 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:41:18 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	render_ents(t_game *game)
 {
 	t_entity	bgr;
 
-	bgr.pos = get_v2(-game->bgr_size.x / 3, -game->bgr_size.y / 3);
+	bgr.pos = get_v2(0, 0);
 	bgr.current_frame = game->bgr;
 	render_ent(game, &bgr);
 	render_type(game, collectible);

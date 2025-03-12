@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 20:41:25 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 22:02:02 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:37:16 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	*rescale_xpm(void *mlx, char *path, int new_w, int new_h)
 
 	original = mlx_xpm_file_to_image(mlx, path, &old_size.x, &old_size.y);
 	scaled = mlx_new_image(mlx, new_w, new_h);
+	if (!original || !scaled)
+		return (printf("unable to load texture at %s\n", path), NULL);
 	pos.y = 0;
 	while (pos.y < new_h)
 	{

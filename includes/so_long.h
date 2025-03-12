@@ -6,19 +6,19 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:23:03 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/16 20:51:07 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:49:36 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <stdlib.h> // malloc + free
-# include <stdio.h> // printf pour debug
-# include <unistd.h> // pour write/read
-# include <math.h> // pour niquer tamere
-# include <string.h> // pour fonctions string
-# include <fcntl.h> // pour open
+# include <stdlib.h>	// malloc + free
+# include <stdio.h>		// printf pour debug
+# include <unistd.h>	// pour write/read
+# include <math.h> 		// pour niquer tamere
+# include <string.h>	// pour fonctions string
+# include <fcntl.h>		// pour open
 # include <time.h>
 
 # include "../libraries/libft/includes/libft.h"
@@ -60,7 +60,7 @@
 # define COLLECTIBLE	'C'
 # define EXIT 			'E'
 # define SPRITES_PATH 			"./includes/sprites/"
-# define BGR_IMG 				"./includes/sprites/BGR_JUNGLE.xpm"
+# define BGR_IMG 				"./includes/sprites/bLxcjh3.xpm"
 
 // vecteur pour la position x * y
 typedef struct s_vector2
@@ -149,8 +149,11 @@ int			update(t_game *game);
 
 t_vec2		get_v2(int x, int y);
 int			cmp_vec2(t_vec2 a, t_vec2 b);
+int			get_urandom(int min, int max);
 int			r_range(int min, int max);
 char		*ft_strmegajoin(char *a, char *b, char *c, char *d);
 void		free_and_exit(char *exit_msg, t_game *game);
+int			char_counter(char *str, char c);
+int			only_contains(char *line, char c);
 
 #endif

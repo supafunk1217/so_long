@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:31:04 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 00:04:28 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:39:38 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int	handle_keypress(int keycode, t_game *game)
 int	handle_close(t_game *game)
 {
 	free_and_exit(NULL, game);
-	return (0);
+	exit (0);
 }

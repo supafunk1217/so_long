@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 22:35:19 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 23:54:37 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:52:39 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ int	get_char_index(char *str, char to_check)
 	return (-1);
 }
 
+void	validate_amounts(char *full_map, t_game *game)
+{
+	if (char_counter(full_map, 'P') != 1)
+	{
+		free(full_map);
+		free_and_exit("Error\nInvalid Player amount generated !", game);
+	}
+	if (char_counter(full_map, 'E') != 1)
+	{
+		free(full_map);
+		free_and_exit("Error\nInvalid EXIT amount generated !", game);
+	}
+	if (char_counter(full_map, 'C') == 0)
+	{
+		free(full_map);
+		free_and_exit("Error\nInvalid Collectible amount generated !", game);
+	}
+}
+
 int	execute_floodfill(t_game *game)
 {
 	char	*full_map;
@@ -68,6 +87,7 @@ int	execute_floodfill(t_game *game)
 		free(full_map);
 		full_map = old_row;
 	}
+	validate_amounts(full_map, game);
 	plr_index = get_char_index(full_map, 'P');
 	floodfill(full_map, plr_index, game->map_size.x + 1, ft_strlen(full_map));
 	if (get_char_amount(full_map, 'E') || get_char_amount(full_map, 'C'))

@@ -6,27 +6,11 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:24:32 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 18:39:08 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:16:09 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-/*static int is_safe_spawn_distance(t_game *game, t_vec2 pos)
-{
-	int	i;
-	int	safe_distance;
-
-	safe_distance = 2 * game->tile_size;
-	i = -1;
-	while (game->ents[++i])
-	{
-		if (abs(game->ents[i]->pos.x - pos.x) < safe_distance && 
-			abs(game->ents[i]->pos.y - pos.y) < safe_distance)
-			return (0);
-	}
-	return (1);
-}*/
 
 void	init_game(t_game *game)
 {
@@ -74,7 +58,8 @@ int	init_map(t_game *game)
 	t_vec2	pos;
 	int		ents_amount;
 
-	game->ents = malloc(sizeof(t_entity) * MAX_ENTITY_AMOUNT);
+	game->ents = malloc(sizeof(t_entity) * \
+		(game->map_size.x * game->map_size.y));
 	if (!game->ents)
 		free_and_exit("alloc for ents", game);
 	ents_amount = 0;

@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:40:00 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/14 14:48:09 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 22:31:45 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	update_player(t_game *game, t_entity *plr)
 	}
 	else if (ent && ent->type == exitance && \
 		game->collectibles == game->max_collectibles)
-		free_and_exit("Splendid victory ! Thanks for playing.", game);
+		free_and_exit("Glorious victory ! Thanks for playing.", game);
 	if (plr->pos.x != plr->start_pos.x || plr->pos.y != plr->start_pos.y)
 	{
 		render_game(game);
@@ -50,7 +50,7 @@ void	update_ents(t_game *game)
 				should_render = 1;
 		i++;
 	}
-	if (should_render)
+	if (should_render || game->time <= 5)
 		render_game(game);
 }
 

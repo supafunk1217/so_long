@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:35:10 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 17:20:13 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:12:34 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ void	free_and_exit(char *msg, t_game *game)
 		game->bgr = NULL;
 	}
 	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
 	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		mlx_destroy_window(game->mlx, game->win);
+		game->win = NULL;
 	}
+	if (game->mlx)
+		mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free(game->bgr);
 	if (msg)
 		printf("%s\n", msg);
 	exit(0);

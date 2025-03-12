@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:28:28 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/14 15:27:27 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:09:06 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	populate_with_ents(char *map)
 	add_character(map, 'P', len);
 	add_character(map, 'E', len);
 	wall_ratio = 10;
-	ennemy_ratio = 30;
+	ennemy_ratio = 50;
 	coll_ratio = 5;
 	i = 0;
 	while (i++ < len / wall_ratio)
@@ -90,7 +90,6 @@ int	main(int argc, char *argv[])
 	char	*map_content;
 	t_vec2	map_size;
 
-	srand(time(0));
 	map_name = ft_strdup("Randomap.ber");
 	map_size = get_v2(15, 8);
 	if (argc >= 2)

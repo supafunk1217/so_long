@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:33:35 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/13 18:02:49 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:58:08 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_vec2	get_v2(int x, int y)
 	return (vector);
 }
 
-//		returns a random value betwewen min and max
+//		returns a random value between min and max
 int	r_range(int min, int max)
 {
 	if (min > max)
 		return (-1);
-	return (rand() % (max - min + 1) + min);
+	return (get_urandom(min, max));
 }
 
 //return 1 automatiquement si la condition est 
@@ -56,4 +56,22 @@ char	*ft_strmegajoin(char *a, char *b, char *c, char *d)
 	a_b_c_d = ft_strjoin(a_b_c, d);
 	free(a_b_c);
 	return (a_b_c_d);
+}
+
+int	get_urandom(int min, int max)
+{
+	static int		fd = -1;
+	static int		initialized = 0;
+	unsigned int	random_value;
+
+	if (!initialized)
+	{
+		fd = open("/dev/urandom", O_RDONLY);
+		if (fd == -1)
+			return (min);
+		initialized = 1;
+	}
+	if (read(fd, &random_value, sizeof(unsigned int)) != sizeof(unsigned int))
+		return (min);
+	return ((min) + (random_value % (max - min + 1)));
 }

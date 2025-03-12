@@ -1,0 +1,14 @@
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==2670931==ERROR: AddressSanitizer: SEGV on unknown address 0x6290000e0000 (pc 0x57128a338c0e bp 0x7ffffca65310 sp 0x7ffffca652e0 T0)
+==2670931==The signal is caused by a WRITE memory access.
+    #0 0x57128a338c0e in process_entity srcs/init_game.c:47
+    #1 0x57128a338d96 in init_map srcs/init_game.c:70
+    #2 0x57128a339e6a in main srcs/main.c:33
+    #3 0x71cb0a029d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x71cb0a029e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #5 0x57128a337864 in _start (/home/rcossett/richard/cursus_3_start_here/so_long_linux/so_long+0x6864)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV srcs/init_game.c:47 in process_entity
+==2670931==ABORTING

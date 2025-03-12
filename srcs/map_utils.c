@@ -6,7 +6,7 @@
 /*   By: rcossett <rcossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:36:15 by rcossett          #+#    #+#             */
-/*   Updated: 2025/02/12 21:55:50 by rcossett         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:15:59 by rcossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,34 @@ void	clean_line(char *line)
 {
 	if (line && line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
+}
+
+int	char_counter(char *str, char c)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	only_contains(char *line, char c)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != c)
+			return (0);
+		i++;
+	}
+	return (1);
 }
